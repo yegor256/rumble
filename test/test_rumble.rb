@@ -33,6 +33,7 @@ class TestRumble < Minitest::Test
       letter = File.join(dir, 'letter.liquid')
       File.write(letter, 'Hi {{first}}, how are you?')
       Rumble::CLI.new(
+        dry: true,
         test: 'test@yegor256.com',
         letter: letter,
         from: 'Yegor Bugayenko <yegor256@gmail.com>'
