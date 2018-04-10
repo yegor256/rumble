@@ -74,6 +74,10 @@ module Rumble
           next
         end
         email = email.strip.downcase
+        if sent.include?(email)
+          puts Rainbow('duplicate').red
+          next
+        end
         sent.push(email)
         name = "#{first.strip} #{last.strip}"
         address = email
@@ -95,10 +99,6 @@ module Rumble
         end
         if skip.include?(email)
           puts Rainbow('skipped').red
-          next
-        end
-        if sent.include?(email)
-          puts Rainbow('duplicate').red
           next
         end
         subject = @opts[:subject]
