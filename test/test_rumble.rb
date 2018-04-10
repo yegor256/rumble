@@ -36,6 +36,7 @@ class TestRumble < Minitest::Test
         dry: true,
         test: 'test@yegor256.com',
         letter: letter,
+        host: 'localhost',
         from: 'Yegor Bugayenko <yegor256@gmail.com>'
       ).send
     end

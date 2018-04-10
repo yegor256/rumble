@@ -17,6 +17,6 @@ Feature: Command Line Processing
     How are you?
 
     """
-    When I run bin/rumble with "--test yegor256@gmail.com --subject test --letter a.liquid --from me@example.com --dry"
+    When I run bin/rumble with "--test yegor256@gmail.com --host test --user test --password test --subject test --letter a.liquid --from me@example.com --dry"
     Then Stdout contains "Sent 1 email"
     And Exit code is zero
