@@ -1,0 +1,17 @@
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'assets/**/*'
+  DisplayCopNames: true
+  TargetRubyVersion: 2.2
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+Metrics/MethodLength:
+  Enabled: false
+Style/MultilineMethodCallIndentation:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Metrics/BlockLength:
+  Max: 50
