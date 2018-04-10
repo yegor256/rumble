@@ -60,10 +60,13 @@ begin
       o.string '--password', 'SMTP password', required: true
       o.string '--subject', 'Email subject', required: true
       o.string '--letter', 'File name with Liquid template', required: true
-      o.string '--targets', 'File name with emails and names'
+      o.string '--csv', 'CSV file with first name, last name, and email cols'
       o.string '--resume', 'Email address from which we should resume'
       o.string '--skip', 'File name with emails that opted-out (black list)'
       o.string '--test', 'Email address to use instead of the real user list'
+      o.string '--col0', 'First name columm', default: 0
+      o.string '--col1', 'Last name columm', default: 1
+      o.string '--col2', 'Email columm', default: 2
     end
   rescue Slop::Error => ex
     raise StandardError, "#{ex.message}, try --help"
@@ -86,5 +89,6 @@ begin
 
 rescue StandardError => ex
   puts "#{Rainbow('ERROR').red} (#{ex.class.name}): #{ex.message}"
+  puts ex.backtrace
   exit(255)
 end

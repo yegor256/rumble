@@ -6,7 +6,7 @@ AllCops:
   TargetRubyVersion: 2.2
 
 Metrics/CyclomaticComplexity:
-  Max: 10
+  Max: 20
 Metrics/MethodLength:
   Enabled: false
 Style/MultilineMethodCallIndentation:
@@ -14,8 +14,8 @@ Style/MultilineMethodCallIndentation:
 Metrics/AbcSize:
   Enabled: false
 Metrics/BlockLength:
-  Max: 50
+  Max: 100
 Metrics/PerceivedComplexity:
-  Max: 10
+  Max: 20
 Style/MultilineTernaryOperator:
   Enabled: false

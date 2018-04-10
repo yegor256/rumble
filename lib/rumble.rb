@@ -21,6 +21,7 @@
 require 'mail'
 require 'uuidtools'
 require 'liquid'
+require 'csv'
 require 'redcarpet'
 require 'redcarpet/render_strip'
 require 'rainbow'
@@ -42,19 +43,33 @@ module Rumble
         File.read(File.expand_path(@opts[:letter]))
       )
       skip = @opts[:skip] ? File.readlines(@opts[:skip]).map(&:strip) : []
-      emails = @opts[:test] ?
-        ["John,Doe,#{@opts[:test]}"]
-        : File.readlines(@opts[:targets]).map(&:strip).reject(&:empty?)
+      if @opts[:test]
+        emails = [['John', 'Doe', @opts[:test]]]
+      else
+        raise '--csv is required' unless @opts[:csv]
+        emails = CSV.read(@opts[:csv])
+      end
       total = 0
       sent = []
       ignore = !@opts[:resume].nil?
       from = @opts[:from].strip
       puts "Sending #{emails.length} email(s) as #{from}"
       domain = from.strip.gsub(/^.+@|>$/)
-      emails.each do |line|
-        first, last, email = line.split(',')
+      emails.each do |array|
+        first = array[@opts[:col0].to_i].strip
+        last = array[@opts[:col1].to_i]
+        unless last
+          puts Rainbow('last name is absent').red
+          next
+        end
+        last = last.strip
+        email = array[@opts[:col2].to_i]
+        unless email
+          puts Rainbow('email is absent').red
+          next
+        end
         email = email.strip.downcase
-        name = "#{first} #{last}".strip
+        name = "#{first.strip} #{last.strip}"
         address = email
         address = "#{name} <#{email}>" unless name.empty?
         print "Sending to #{address}... "
