@@ -31,6 +31,20 @@ Run it locally and read its output:
 $ rumble --help
 ```
 
+Simple liquid letter looks like this:
+
+```
+{{ first }},
+
+How are you?
+
+Best,
+Yegor
+```
+
+The list of emails must contain three columns separated by a comma: first
+name, last name, and email.
+
 ## How to contribute?
 
 Just submit a pull request. Make sure `rake` passes.
