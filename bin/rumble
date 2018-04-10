@@ -26,46 +26,65 @@ require 'mail'
 require_relative '../lib/rumble'
 require_relative '../lib/rumble/version'
 
-opts = Slop.parse(ARGV, strict: true, help: true) do |o|
-  o.banner = "Usage (#{Rumble::VERSION}): rumble [options]"
-  o.bool '-h', '--help', 'Show these instructions'
-  o.bool '-v', '--version', 'Show current version'
-  o.bool '--dry', 'Dry run, no emails will be delivered'
-  o.string '--from', 'Full SMTP From field, e.g. "John Doe <jd@example.com>"'
-  o.string '--host', 'SMTP host name'
-  o.string '--port', 'SMTP port number', default: 25
-  o.string '--user', 'SMTP user name'
-  o.string '--password', 'SMTP password'
-  o.string '--subject', 'Email subject'
-  o.string '--resume', 'Email address from which we should resume'
-  o.string '--letter', 'File name with Liquid template'
-  o.string '--skip', 'File name with emails that opted-out (black list)'
-  o.string '--test', 'Email address to use instead of the real user list'
-  o.string '--targets', 'File name with emails and names'
-  o.string '--config', 'Configuration file name', default: '~/.rumble'
+begin
+  args = []
+  config = File.expand_path('~/.rumble')
+  if File.exist?(config)
+    body = File.read(config)
+    extra = body.split(/[\r\n]+/).map(&:strip)
+    args += extra
+    puts "Found #{body.split(/\n/).length} lines in #{config}"
+  else
+    puts "Default config file #{config} not found"
+  end
+  args += ARGV
+
+  begin
+    opts = Slop.parse(args, strict: true, help: true) do |o|
+      o.banner = "Usage (#{Rumble::VERSION}): rumble [options]"
+      o.bool '--help', 'Show these instructions' do
+        puts o
+        exit
+      end
+      o.bool '-v', '--version', 'Show current version' do
+        puts Rumble::VERSION
+        exit
+      end
+      o.bool '--dry', 'Dry run, no emails will be delivered'
+      o.string '--from',
+        'Full SMTP From field, e.g. "John Doe <jd@example.com>"',
+        required: true
+      o.string '--host', 'SMTP host name', required: true
+      o.string '--port', 'SMTP port number', default: 25
+      o.string '--user', 'SMTP user name', required: true
+      o.string '--password', 'SMTP password', required: true
+      o.string '--subject', 'Email subject', required: true
+      o.string '--letter', 'File name with Liquid template', required: true
+      o.string '--targets', 'File name with emails and names'
+      o.string '--resume', 'Email address from which we should resume'
+      o.string '--skip', 'File name with emails that opted-out (black list)'
+      o.string '--test', 'Email address to use instead of the real user list'
+    end
+  rescue Slop::Error => ex
+    raise StandardError, "#{ex.message}, try --help"
+  end
+
+  Encoding.default_external = Encoding::UTF_8
+  Encoding.default_internal = Encoding::UTF_8
+
+  Mail.defaults do
+    delivery_method :smtp, {
+      :address => opts[:host],
+      :port => opts[:port],
+      :user_name => opts[:user],
+      :password => opts[:password],
+      :enable_starttls_auto => true
+    }
+  end
+
+  Rumble::CLI.new(opts).send
+
+rescue StandardError => ex
+  puts "#{Rainbow('ERROR').red} (#{ex.class.name}): #{ex.message}"
+  exit(255)
 end
-
-if opts.help?
-  puts opts
-  exit
-end
-
-if opts.version?
-  puts Rumble::VERSION
-  exit
-end
-
-Encoding.default_external = Encoding::UTF_8
-Encoding.default_internal = Encoding::UTF_8
-
-Mail.defaults do
-  delivery_method :smtp, {
-    :address => opts[:host],
-    :port => opts[:port],
-    :user_name => opts[:user],
-    :password => opts[:password],
-    :enable_starttls_auto => true
-  }
-end
-
-Rumble::CLI.new(opts).send

@@ -2,7 +2,7 @@ Feature: Command Line Processing
   As a newsletter author I want to be able to send a newsletter
 
   Scenario: Help can be printed
-    When I run bin/rumble with "-h"
+    When I run bin/rumble with "--help"
     Then Exit code is zero
     And Stdout contains "--help"
 
@@ -17,6 +17,6 @@ Feature: Command Line Processing
     How are you?
 
     """
-    When I run bin/rumble with "--test yegor256@gmail.com --letter a.liquid --from me@example.com"
+    When I run bin/rumble with "--test yegor256@gmail.com --subject test --letter a.liquid --from me@example.com --dry"
     Then Stdout contains "Sent 1 email"
     And Exit code is zero

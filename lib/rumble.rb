@@ -95,7 +95,7 @@ module Rumble
             body html
           end
         end
-        mail.deliver!
+        mail.deliver! unless @opts[:dry]
         sent.push(email)
         total += 1
         puts "#{Rainbow('done').green} ##{total}"
