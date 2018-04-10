@@ -38,13 +38,13 @@ module Rumble
     end
 
     def send
-      letter = Liquid::Template.parse(File.read(File.expand_path(@opts[:letter])))
+      letter = Liquid::Template.parse(
+        File.read(File.expand_path(@opts[:letter]))
+      )
       skip = @opts[:skip] ? File.readlines(@opts[:skip]).map(&:strip) : []
-      if @opts[:test]
-        emails = ["John,Doe,#{@opts[:test]}"]
-      else
-        emails = File.readlines(@opts[:targets]).map(&:strip).reject(&:empty?)
-      end
+      emails = @opts[:test] ?
+        ["John,Doe,#{@opts[:test]}"]
+        : File.readlines(@opts[:targets]).map(&:strip).reject(&:empty?)
       total = 0
       sent = []
       ignore = !@opts[:resume].nil?
@@ -56,15 +56,15 @@ module Rumble
         email = email.strip.downcase
         name = "#{first} #{last}".strip
         address = email
-        unless name.empty?
-          address = "#{name} <#{email}>"
-        end
+        address = "#{name} <#{email}>" unless name.empty?
         print "Sending to #{address}... "
         markdown = letter.render(
           'email' => email, 'first' => first, 'last' => last
         )
-        html = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(markdown)
-        text = Redcarpet::Markdown.new(Redcarpet::Render::StripDown).render(markdown)
+        html = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+          .render(markdown)
+        text = Redcarpet::Markdown.new(Redcarpet::Render::StripDown)
+          .render(markdown)
         if ignore
           if opts[:resume] != email
             puts "ignored, waiting for #{opts[:resume]}"
@@ -73,11 +73,11 @@ module Rumble
           ignore = false
         end
         if skip.include?(email)
-          puts "#{Rainbow('skipped').red}"
+          puts Rainbow('skipped').red
           next
         end
         if sent.include?(email)
-          puts "#{Rainbow('duplicate').red}"
+          puts Rainbow('duplicate').red
           next
         end
         subject = @opts[:subject]

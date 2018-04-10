@@ -44,12 +44,12 @@ Gem::Specification.new do |s|
   s.test_files = s.files.grep(%r{^(test|spec|features)/})
   s.rdoc_options = ['--charset=UTF-8']
   s.extra_rdoc_files = ['README.md', 'LICENSE.txt']
-  s.add_runtime_dependency 'mail', '~>2.7.0'
-  s.add_runtime_dependency 'uuidtools', '~>2.1.5'
   s.add_runtime_dependency 'liquid', '~>4.0.0'
+  s.add_runtime_dependency 'mail', '~>2.7.0'
   s.add_runtime_dependency 'rainbow', '~>3.0'
   s.add_runtime_dependency 'redcarpet', '~>3.4.0'
   s.add_runtime_dependency 'slop', '~>4.4'
+  s.add_runtime_dependency 'uuidtools', '~>2.1.5'
   s.add_development_dependency 'codecov', '0.1.10'
   s.add_development_dependency 'cucumber', '1.3.17'
   s.add_development_dependency 'minitest', '5.5.0'
