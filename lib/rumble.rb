@@ -74,6 +74,7 @@ module Rumble
           next
         end
         email = email.strip.downcase
+        sent.push(email)
         name = "#{first.strip} #{last.strip}"
         address = email
         address = "#{name} <#{email}>" unless name.empty?
@@ -116,11 +117,10 @@ module Rumble
           end
         end
         mail.deliver! unless @opts[:dry]
-        sent.push(email)
         total += 1
         puts "#{Rainbow('done').green} ##{total}"
       end
-      puts "Sent #{sent.size} emails"
+      puts "Processed #{sent.size} emails"
     end
   end
 end

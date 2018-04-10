@@ -18,5 +18,5 @@ Feature: Command Line Processing
 
     """
     When I run bin/rumble with "--test yegor256@gmail.com --host test --user test --password test --subject test --letter a.liquid --from me@example.com --dry --resume test@example.com"
-    Then Stdout contains "Sent 0 email"
+    Then Stdout contains "Processed 1 email"
     And Exit code is zero
