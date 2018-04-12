@@ -51,7 +51,7 @@ module Rumble
       end
       total = 0
       sent = []
-      ignore = !@opts[:resume].nil?
+      ignore = !@opts[:resume].nil? && !@opts[:test]
       from = @opts[:from].strip
       puts "Sending #{emails.length} email(s) as #{from}"
       domain = from.strip.gsub(/^.+@|>$/)
