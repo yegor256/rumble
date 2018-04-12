@@ -56,18 +56,8 @@ module Rumble
       puts "Sending #{emails.length} email(s) as #{from}"
       domain = from.strip.gsub(/^.+@|>$/)
       emails.each do |array|
-        first = array[@opts[:col0].to_i]
-        unless first
-          puts Rainbow('First name is absent').red
-          next
-        end
-        first = first.strip
-        last = array[@opts[:col1].to_i]
-        unless last
-          puts Rainbow('Last name is absent').red
-          next
-        end
-        last = last.strip
+        first = (array[@opts[:col0].to_i] || '').strip
+        last = (array[@opts[:col1].to_i] || '').strip
         email = array[@opts[:col2].to_i]
         unless email
           puts Rainbow('Email is absent').red
@@ -79,7 +69,7 @@ module Rumble
           next
         end
         sent.push(email)
-        name = "#{first.strip} #{last.strip}"
+        name = "#{first.strip} #{last.strip}".strip
         address = email
         address = "#{name} <#{email}>" unless name.empty?
         print "Sending to #{address}... "
