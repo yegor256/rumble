@@ -91,7 +91,7 @@ module Rumble
         text = Redcarpet::Markdown.new(Redcarpet::Render::StripDown)
           .render(markdown)
         if ignore
-          if @opts[:resume] != email
+          if @opts[:resume].downcase != email
             puts "ignored, waiting for #{@opts[:resume]}"
             next
           end
