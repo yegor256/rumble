@@ -44,7 +44,11 @@ module Rumble
       )
       skip = @opts[:skip] ? File.readlines(@opts[:skip]).map(&:strip) : []
       if @opts[:test]
-        emails = [['John', 'Doe', @opts[:test]]]
+        rcpt = []
+        rcpt[@opts['col-first'].to_i] = 'John'
+        rcpt[@opts['col-last'].to_i] = 'Doe'
+        rcpt[@opts['col-email'].to_i] = @opts[:test]
+        emails = [rcpt]
       else
         raise '--csv is required' unless @opts[:csv]
         emails = CSV.read(@opts[:csv])
@@ -56,19 +60,21 @@ module Rumble
       puts "Sending #{emails.length} email(s) as #{from}"
       domain = from.strip.gsub(/^.+@|>$/)
       emails.each do |array|
-        first = (array[@opts[:col0].to_i] || '').strip
-        last = (array[@opts[:col1].to_i] || '').strip
-        email = array[@opts[:col2].to_i]
+        email = array[@opts['col-email'].to_i]
         unless email
-          puts Rainbow('Email is absent').red
+          puts "Email is #{Rainbow('absent').red} \
+at the column ##{@opts['col-email'].to_i}: #{array}"
           next
         end
         email = email.strip.downcase
         if sent.include?(email)
-          puts Rainbow('duplicate').red
+          puts "#{Rainbow('Duplicate').red} at: #{array}"
           next
         end
         sent.push(email)
+        first = (array[@opts['col-first'].to_i] || '').strip
+        last = (array[@opts['col-last'].to_i] || '').strip
+        first, last = first.split(' ', 2) if last.empty? && first.include?(' ')
         name = "#{first.strip} #{last.strip}".strip
         address = email
         address = "#{name} <#{email}>" unless name.empty?
@@ -82,7 +88,7 @@ module Rumble
           .render(markdown)
         if ignore
           if @opts[:resume].downcase != email
-            puts "ignored, waiting for #{@opts[:resume]}"
+            puts "#{Rainbow('ignored').orange}, waiting for #{@opts[:resume]}"
             next
           end
           ignore = false
