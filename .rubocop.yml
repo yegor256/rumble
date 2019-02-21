@@ -3,13 +3,13 @@ AllCops:
     - 'bin/**/*'
     - 'assets/**/*'
   DisplayCopNames: true
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.3
 
 Metrics/CyclomaticComplexity:
   Max: 20
 Metrics/MethodLength:
   Enabled: false
-Style/MultilineMethodCallIndentation:
+Layout/MultilineMethodCallIndentation:
   Enabled: false
 Metrics/AbcSize:
   Enabled: false
@@ -18,4 +18,6 @@ Metrics/BlockLength:
 Metrics/PerceivedComplexity:
   Max: 20
 Style/MultilineTernaryOperator:
+  Enabled: false
+Layout/EmptyLineAfterGuardClause:
   Enabled: false
