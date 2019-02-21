@@ -54,6 +54,9 @@ begin
       o.string '--from',
         'Full SMTP From field, e.g. "John Doe <jd@example.com>"',
         required: true
+      o.string '--method',
+        'How to deliver them: "smtp" or "sendmail" (default: sendmail)',
+        default: 'sendmail'
       o.string '--host', 'SMTP host name', required: true
       o.string '--port', 'SMTP port number (25 by default)', default: 25
       o.string '--user', 'SMTP user name', required: true
@@ -69,20 +72,27 @@ begin
       o.string '--col-email', 'Email columm (2 by default)', default: 2
     end
   rescue Slop::Error => ex
-    raise StandardError, "#{ex.message}, try --help"
+    raise "#{ex.message}, try --help"
   end
 
   Encoding.default_external = Encoding::UTF_8
   Encoding.default_internal = Encoding::UTF_8
 
   Mail.defaults do
-    delivery_method :smtp, {
-      :address => opts[:host],
-      :port => opts[:port],
-      :user_name => opts[:user],
-      :password => opts[:password],
-      :enable_starttls_auto => true
-    }
+    case opts[:method].downcase.strip
+    when 'sendmail'
+      delivery_method :sendmail
+    when 'smtp'
+      delivery_method :smtp, {
+        :address => opts[:host],
+        :port => opts[:port],
+        :user_name => opts[:user],
+        :password => opts[:password],
+        :enable_starttls_auto => true
+      }
+    else
+      raise "Delivery method #{opts[:method]} is not supported"
+    end
   end
 
   Rumble::CLI.new(opts).send
