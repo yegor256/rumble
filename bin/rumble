@@ -57,10 +57,10 @@ begin
       o.string '--method',
         'How to deliver them: "smtp" or "sendmail" (default: sendmail)',
         default: 'sendmail'
-      o.string '--host', 'SMTP host name', required: true
+      o.string '--host', 'SMTP host name'
       o.string '--port', 'SMTP port number (25 by default)', default: 25
-      o.string '--user', 'SMTP user name', required: true
-      o.string '--password', 'SMTP password', required: true
+      o.string '--user', 'SMTP user name'
+      o.string '--password', 'SMTP password'
       o.string '--subject', 'Email subject', required: true
       o.string '--letter', 'File name with Liquid template', required: true
       o.string '--csv', 'CSV file with first name, last name, and email cols'
@@ -83,6 +83,10 @@ begin
     when 'sendmail'
       delivery_method :sendmail
     when 'smtp'
+      raise '--host is required' unless opts[:host]
+      raise '--port is required' unless opts[:port]
+      raise '--user is required' unless opts[:user]
+      raise '--password is required' unless opts[:password]
       delivery_method :smtp, {
         :address => opts[:host],
         :port => opts[:port],
