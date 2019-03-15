@@ -25,7 +25,6 @@ require 'English'
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require_relative 'lib/rumble/version'
-
 Gem::Specification.new do |s|
   s.specification_version = 2 if s.respond_to? :specification_version=
   if s.respond_to? :required_rubygems_version=
@@ -48,6 +47,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ['README.md', 'LICENSE.txt']
   s.add_runtime_dependency 'liquid', '4.0.1'
   s.add_runtime_dependency 'mail', '2.7.1'
+  s.add_runtime_dependency 'net-smtp-proxy', '2.0.0'
   s.add_runtime_dependency 'rainbow', '3.0.0'
   s.add_runtime_dependency 'redcarpet', '3.4.0'
   s.add_runtime_dependency 'slop', '4.6.2'

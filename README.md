@@ -45,6 +45,8 @@ Yegor
 The list of emails must contain three columns separated by a comma: first
 name, last name, and email.
 
+If you want to send via HTTP/SMTP proxy, use `--proxy=host:port`.
+
 # How to contribute
 
 Read [these guidelines](https://www.yegor256.com/2014/04/15/github-guidelines.html).

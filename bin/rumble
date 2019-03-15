@@ -23,6 +23,7 @@ STDOUT.sync = true
 
 require 'slop'
 require 'mail'
+require 'net/smtp/proxy'
 require_relative '../lib/rumble'
 require_relative '../lib/rumble/version'
 
@@ -61,6 +62,7 @@ begin
       o.string '--port', 'SMTP port number (25 by default)', default: 25
       o.string '--user', 'SMTP user name'
       o.string '--password', 'SMTP password'
+      o.string '--proxy', 'HTTP proxy, e.g. "192.168.0.1:8080"'
       o.string '--subject', 'Email subject', required: true
       o.string '--letter', 'File name with Liquid template', required: true
       o.string '--csv', 'CSV file with first name, last name, and email cols'
@@ -78,29 +80,45 @@ begin
   Encoding.default_external = Encoding::UTF_8
   Encoding.default_internal = Encoding::UTF_8
 
+  puts 'It is "dry" run, no emails will be actually sent!' if opts[:dry]
+
   Mail.defaults do
     case opts[:method].downcase.strip
     when 'sendmail'
+      puts "--host=#{opts[:host]} is not allowed w/sendmail" if opts[:host]
+      puts "--port=#{opts[:port]} is not allowed w/sendmail" if opts[:port]
+      puts "--user=#{opts[:user]} is not allowed w/sendmail" if opts[:user]
+      puts '--password is not allowed when using sendmail' if opts[:password]
       delivery_method :sendmail
     when 'smtp'
       raise '--host is required' unless opts[:host]
       raise '--port is required' unless opts[:port]
       raise '--user is required' unless opts[:user]
       raise '--password is required' unless opts[:password]
-      delivery_method :smtp, {
-        :address => opts[:host],
-        :port => opts[:port],
-        :user_name => opts[:user],
-        :password => opts[:password],
-        :enable_starttls_auto => true
-      }
+      if opts[:proxy]
+        host, port = opts[:proxy].strip.split(':')
+        delivery_method Net::SMTP::Proxy::DeliveryMethod, {
+          address: opts[:host],
+          port: opts[:port],
+          proxy_address: "http://#{host.strip}",
+          proxy_port: port,
+          openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
+          domain: 'gmail.com'
+        }
+      else
+        delivery_method :smtp, {
+          :address => opts[:host],
+          :port => opts[:port],
+          :user_name => opts[:user],
+          :password => opts[:password],
+          :enable_starttls_auto => true
+        }
+      end
     else
       raise "Delivery method #{opts[:method]} is not supported"
     end
   end
-
   Rumble::CLI.new(opts).send
-
 rescue StandardError => ex
   puts "#{Rainbow('ERROR').red} (#{ex.class.name}): #{ex.message}"
   puts ex.backtrace
