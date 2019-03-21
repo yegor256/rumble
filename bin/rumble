@@ -59,10 +59,10 @@ begin
         'How to deliver them: "smtp" or "sendmail" (default: sendmail)',
         default: 'sendmail'
       o.string '--host', 'SMTP host name'
-      o.string '--port', 'SMTP port number (25 by default)', default: 25
+      o.integer '--port', 'SMTP port number (25 by default)', default: 25
       o.string '--user', 'SMTP user name'
       o.string '--password', 'SMTP password'
-      o.string '--proxy', 'HTTP proxy, e.g. "192.168.0.1:8080"'
+      o.string '--proxy', 'HTTP/SOCKS proxy, e.g. "socks:192.168.0.1:8080"'
       o.string '--subject', 'Email subject', required: true
       o.string '--letter', 'File name with Liquid template', required: true
       o.string '--csv', 'CSV file with first name, last name, and email cols'
@@ -96,22 +96,22 @@ begin
       raise '--user is required' unless opts[:user]
       raise '--password is required' unless opts[:password]
       if opts[:proxy]
-        host, port = opts[:proxy].strip.split(':')
+        scheme, host, port = opts[:proxy].strip.split(':')
         delivery_method Net::SMTP::Proxy::DeliveryMethod, {
           address: opts[:host],
           port: opts[:port],
-          proxy_address: "http://#{host.strip}",
-          proxy_port: port,
+          proxy_address: "#{scheme}://#{host}",
+          proxy_port: port.to_i,
           openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
-          domain: 'gmail.com'
+          enable_starttls_auto: true
         }
       else
         delivery_method :smtp, {
-          :address => opts[:host],
-          :port => opts[:port],
-          :user_name => opts[:user],
-          :password => opts[:password],
-          :enable_starttls_auto => true
+          address: opts[:host],
+          port: opts[:port],
+          user_name: opts[:user],
+          password: opts[:password],
+          enable_starttls_auto: true
         }
       end
     else
