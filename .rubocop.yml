@@ -5,6 +5,8 @@ AllCops:
   DisplayCopNames: true
   TargetRubyVersion: 2.3
 
+Layout/EndOfLine:
+  EnforcedStyle: lf
 Metrics/CyclomaticComplexity:
   Max: 20
 Metrics/MethodLength:

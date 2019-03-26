@@ -102,6 +102,7 @@ begin
           port: opts[:port],
           proxy_address: "#{scheme}://#{host}",
           proxy_port: port.to_i,
+          authentication: 'plain',
           openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
           enable_starttls_auto: true
         }
