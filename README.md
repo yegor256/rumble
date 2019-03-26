@@ -7,8 +7,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/orvfo2qgmd1d7a2i?svg=true)](https://ci.appveyor.com/project/yegor256/rumble)
 [![PDD status](http://www.0pdd.com/svg?name=yegor256/rumble)](http://www.0pdd.com/p?name=yegor256/rumble)
 [![Gem Version](https://badge.fury.io/rb/rumble.svg)](http://badge.fury.io/rb/rumble)
-[![Dependency Status](https://gemnasium.com/yegor256/rumble.svg)](https://gemnasium.com/yegor256/rumble)
-[![Code Climate](http://img.shields.io/codeclimate/github/yegor256/rumble.svg)](https://codeclimate.com/github/yegor256/rumble)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a3fee65d42a9cf6397ea/maintainability)](https://codeclimate.com/github/yegor256/rumble/maintainability)
 [![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/rumble.svg)](https://codecov.io/github/yegor256/rumble?branch=master)
 
 ## What this is for?
