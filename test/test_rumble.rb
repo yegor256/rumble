@@ -24,6 +24,7 @@ require 'minitest/autorun'
 require 'tmpdir'
 require 'slop'
 require_relative '../lib/rumble'
+require_relative '../lib/rumble/cli'
 
 # Rumble main module test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)

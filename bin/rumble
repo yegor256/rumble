@@ -26,6 +26,7 @@ require 'mail'
 require 'net/smtp/proxy'
 require_relative '../lib/rumble'
 require_relative '../lib/rumble/version'
+require_relative '../lib/rumble/cli'
 
 begin
   args = []
@@ -34,7 +35,8 @@ begin
     body = File.read(config)
     extra = body.split(/[\r\n]+/).map(&:strip)
     args += extra
-    puts "Found #{body.split(/\n/).length} lines in #{config}"
+    puts "Found #{body.split(/\n/).length} lines in #{config}:
+  #{extra.join("\n  ")}"
   else
     puts "Default config file #{config} not found"
   end
@@ -95,19 +97,24 @@ begin
       raise '--port is required' unless opts[:port]
       raise '--user is required' unless opts[:user]
       raise '--password is required' unless opts[:password]
+      from = Mail::Address.new(opts[:from])
       if opts[:proxy]
         scheme, host, port = opts[:proxy].strip.split(':')
         delivery_method Net::SMTP::Proxy::DeliveryMethod, {
+          domain: from.domain,
           address: opts[:host],
           port: opts[:port],
           proxy_address: "#{scheme}://#{host}",
           proxy_port: port.to_i,
           authentication: 'plain',
           openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
-          enable_starttls_auto: true
+          enable_starttls_auto: true,
+          user_name: opts[:user],
+          password: opts[:password]
         }
       else
         delivery_method :smtp, {
+          domain: from.domain,
           address: opts[:host],
           port: opts[:port],
           user_name: opts[:user],

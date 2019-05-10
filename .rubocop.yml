@@ -23,3 +23,5 @@ Style/MultilineTernaryOperator:
   Enabled: false
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
