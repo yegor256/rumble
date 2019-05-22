@@ -109,6 +109,7 @@ begin
           authentication: 'plain',
           openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
           enable_starttls_auto: true,
+          enable_starttls: true,
           user_name: opts[:user],
           password: opts[:password]
         }
@@ -119,6 +120,7 @@ begin
           port: opts[:port],
           user_name: opts[:user],
           password: opts[:password],
+          enable_starttls: true,
           enable_starttls_auto: true
         }
       end
