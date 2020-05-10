@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2018-2019 Yegor Bugayenko
+# Copyright (c) 2018-2020 Yegor Bugayenko
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the 'Software'), to deal
@@ -20,10 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+require 'English'
 require 'mail'
 require 'uuidtools'
 require 'liquid'
 require 'csv'
+require 'tmpdir'
 require 'redcarpet'
 require 'redcarpet/render_strip'
 require 'rainbow'
@@ -31,7 +33,7 @@ require_relative 'version'
 
 # Rumble main script.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2018-2019 Yegor Bugayenko
+# Copyright:: Copyright (c) 2018-2020 Yegor Bugayenko
 # License:: MIT
 class Rumble::CLI
   # Make an instance.
@@ -112,6 +114,15 @@ at the column ##{@opts['col-email'].to_i}: #{array}"
         html_part do
           content_type 'text/html; charset=UTF-8'
           body html
+        end
+      end
+      if @opts[:attach]
+        Dir.mktmpdir do |dir|
+          `#{@opts[:attach]} "#{email}" "#{name}" "#{dir}"`
+          raise 'Failed to exec' unless $CHILD_STATUS.exitstatus.zero?
+          Dir[File.join(dir, '*')].each do |f|
+            mail.add_file(filename: File.basename(f), content: IO.read(f))
+          end
         end
       end
       mail.deliver! unless @opts[:dry]

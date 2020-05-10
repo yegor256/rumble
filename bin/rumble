@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# Copyright (c) 2018-2019 Yegor Bugayenko
+# Copyright (c) 2018-2020 Yegor Bugayenko
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the 'Software'), to deal
@@ -74,6 +74,7 @@ begin
       o.string '--col-first', 'First name columm (0 by default)', default: 0
       o.string '--col-last', 'Last name columm (1 by default)', default: 1
       o.string '--col-email', 'Email columm (2 by default)', default: 2
+      o.string '--attach', 'The script to run on each email'
     end
   rescue Slop::Error => ex
     raise "#{ex.message}, try --help"
