@@ -119,7 +119,7 @@ at the column ##{@opts['col-email'].to_i}: #{array}"
       if @opts[:attach]
         Dir.mktmpdir do |dir|
           `#{@opts[:attach]} "#{email}" "#{name}" "#{dir}"`
-          raise 'Failed to exec' unless $CHILD_STATUS.exitstatus.zero?
+          raise 'Failed to exec' unless $CHILD_STATUS.success?
           Dir[File.join(dir, '*')].each do |f|
             mail.add_file(filename: File.basename(f), content: IO.read(f))
           end
