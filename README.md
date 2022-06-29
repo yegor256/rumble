@@ -5,8 +5,7 @@
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/rumble)](http://www.rultor.com/p/yegor256/rumble)
 [![We recommend RubyMine](https://www.elegantobjects.org/rubymine.svg)](https://www.jetbrains.com/ruby/)
 
-[![Build Status](https://travis-ci.org/yegor256/rumble.svg)](https://travis-ci.org/yegor256/rumble)
-[![Build status](https://ci.appveyor.com/api/projects/status/orvfo2qgmd1d7a2i?svg=true)](https://ci.appveyor.com/project/yegor256/rumble)
+[![rake](https://github.com/yegor256/rumble/actions/workflows/rake.yml/badge.svg)](https://github.com/yegor256/rumble/actions/workflows/rake.yml)
 [![PDD status](http://www.0pdd.com/svg?name=yegor256/rumble)](http://www.0pdd.com/p?name=yegor256/rumble)
 [![Gem Version](https://badge.fury.io/rb/rumble.svg)](http://badge.fury.io/rb/rumble)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a3fee65d42a9cf6397ea/maintainability)](https://codeclimate.com/github/yegor256/rumble/maintainability)
