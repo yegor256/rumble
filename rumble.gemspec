@@ -47,7 +47,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'redcarpet', '3.5.1'
   s.add_runtime_dependency 'slop', '4.9.2'
   s.add_runtime_dependency 'uuidtools', '2.2.0'
-  s.add_development_dependency 'codecov', '0.6.0'
+  s.add_development_dependency 'codecov', '0.2.12'
   s.add_development_dependency 'cucumber', '8.0.0'
   s.add_development_dependency 'minitest', '5.16.1'
   s.add_development_dependency 'rake', '13.0.6'
