@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2018-2022 Yegor Bugayenko
+# Copyright (c) 2018-2024 Yegor Bugayenko
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the 'Software'), to deal
@@ -42,18 +42,11 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ['README.md', 'LICENSE.txt']
   s.add_runtime_dependency 'liquid', '5.3.0'
   s.add_runtime_dependency 'mail', '2.7.1'
+  s.add_runtime_dependency 'net-smtp', '0.5.0'
   s.add_runtime_dependency 'net-smtp-proxy', '2.0.0'
   s.add_runtime_dependency 'rainbow', '3.1.1'
   s.add_runtime_dependency 'redcarpet', '3.5.1'
   s.add_runtime_dependency 'slop', '4.9.2'
   s.add_runtime_dependency 'uuidtools', '2.2.0'
-  s.add_development_dependency 'codecov', '0.6.0'
-  s.add_development_dependency 'cucumber', '8.0.0'
-  s.add_development_dependency 'minitest', '5.16.1'
-  s.add_development_dependency 'rake', '13.0.6'
-  s.add_development_dependency 'rdoc', '6.4.0'
-  s.add_development_dependency 'rspec-rails', '5.1.2'
-  s.add_development_dependency 'rubocop', '1.31.1'
-  s.add_development_dependency 'rubocop-rspec', '2.11.1'
   s.metadata['rubygems_mfa_required'] = 'true'
 end
