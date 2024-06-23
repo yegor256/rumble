@@ -18,32 +18,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ---
-AllCops:
-  Exclude:
-    - 'bin/**/*'
-    - 'assets/**/*'
-  DisplayCopNames: true
-  TargetRubyVersion: 2.3
-  NewCops: enable
-  SuggestExtensions: false
-
-Layout/EndOfLine:
-  EnforcedStyle: lf
-Metrics/CyclomaticComplexity:
-  Max: 22
-Metrics/MethodLength:
-  Enabled: false
-Layout/MultilineMethodCallIndentation:
-  Enabled: false
-Metrics/AbcSize:
-  Enabled: false
-Metrics/BlockLength:
-  Max: 100
-Metrics/PerceivedComplexity:
-  Max: 22
-Style/MultilineTernaryOperator:
-  Enabled: false
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
-Style/ClassAndModuleChildren:
-  Enabled: false
+name: copyrights
+'on':
+  push:
+  pull_request:
+jobs:
+  copyrights:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: yegor256/copyrights-action@0.0.4

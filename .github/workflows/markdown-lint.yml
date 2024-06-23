@@ -12,38 +12,27 @@
 #
 # THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFINGEMENT. IN NO EVENT SHALL THE
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ---
-AllCops:
-  Exclude:
-    - 'bin/**/*'
-    - 'assets/**/*'
-  DisplayCopNames: true
-  TargetRubyVersion: 2.3
-  NewCops: enable
-  SuggestExtensions: false
-
-Layout/EndOfLine:
-  EnforcedStyle: lf
-Metrics/CyclomaticComplexity:
-  Max: 22
-Metrics/MethodLength:
-  Enabled: false
-Layout/MultilineMethodCallIndentation:
-  Enabled: false
-Metrics/AbcSize:
-  Enabled: false
-Metrics/BlockLength:
-  Max: 100
-Metrics/PerceivedComplexity:
-  Max: 22
-Style/MultilineTernaryOperator:
-  Enabled: false
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
-Style/ClassAndModuleChildren:
-  Enabled: false
+name: markdown-lint
+'on':
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+    paths-ignore: ['paper/**', 'sandbox/**']
+concurrency:
+  group: markdown-lint-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  markdown-lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: articulate/actions-markdownlint@v1
