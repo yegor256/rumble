@@ -23,12 +23,12 @@
 source 'https://rubygems.org'
 gemspec
 
-gem 'cucumber', '8.0.0', require: false
+gem 'cucumber', '9.2.0', require: false
 gem 'minitest', '5.24.0', require: false
-gem 'rake', '13.0.6', require: false
-gem 'rdoc', '6.4.1.1', require: false
+gem 'rake', '13.2.1', require: false
 gem 'rspec-rails', '5.1.2', require: false
-gem 'rubocop', '1.31.1', require: false
-gem 'rubocop-rspec', '2.11.1', require: false
+gem 'rubocop', '1.64.1', require: false
+gem 'rubocop-rspec', '3.0.1', require: false
 gem 'simplecov', '0.22.0', require: false
 gem 'simplecov-cobertura', '2.1.0', require: false
+gem 'yard', '0.9.36', require: false

@@ -40,13 +40,13 @@ Gem::Specification.new do |s|
   s.executables = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
   s.rdoc_options = ['--charset=UTF-8']
   s.extra_rdoc_files = ['README.md', 'LICENSE.txt']
-  s.add_runtime_dependency 'liquid', '5.3.0'
-  s.add_runtime_dependency 'mail', '2.7.1'
+  s.add_runtime_dependency 'liquid', '5.5.0'
+  s.add_runtime_dependency 'mail', '2.8.1'
   s.add_runtime_dependency 'net-smtp', '0.5.0'
   s.add_runtime_dependency 'net-smtp-proxy', '2.0.0'
   s.add_runtime_dependency 'rainbow', '3.1.1'
-  s.add_runtime_dependency 'redcarpet', '3.5.1'
-  s.add_runtime_dependency 'slop', '4.9.2'
+  s.add_runtime_dependency 'redcarpet', '3.6.0'
+  s.add_runtime_dependency 'slop', '4.10.1'
   s.add_runtime_dependency 'uuidtools', '2.2.0'
   s.metadata['rubygems_mfa_required'] = 'true'
 end
