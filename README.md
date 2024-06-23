@@ -1,3 +1,5 @@
+# Command Line Mass-Email Sender
+
 <img src="/logo.svg" width="64px" height="64px"/>
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
@@ -9,7 +11,6 @@
 [![Gem Version](https://badge.fury.io/rb/rumble.svg)](http://badge.fury.io/rb/rumble)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a3fee65d42a9cf6397ea/maintainability)](https://codeclimate.com/github/yegor256/rumble/maintainability)
 [![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/rumble.svg)](https://codecov.io/github/yegor256/rumble?branch=master)
-
 ![Lines of code](https://img.shields.io/tokei/lines/github/yegor256/rumble)
 [![Hits-of-Code](https://hitsofcode.com/github/yegor256/0rsk)](https://hitsofcode.com/view/github/yegor256/0rsk)
 
@@ -18,13 +19,13 @@ This command line tool helps you send newsletters.
 Install it first:
 
 ```bash
-$ gem install rumble
+gem install rumble
 ```
 
 Run it locally and read its output:
 
 ```bash
-$ rumble --help
+rumble --help
 ```
 
 Simple liquid letter looks like this:
@@ -45,14 +46,16 @@ If you want to send via HTTP/SMTP proxy, use `--proxy=socks:<host>:<port>`.
 
 ## How to contribute
 
-Read [these guidelines](https://www.yegor256.com/2014/04/15/github-guidelines.html).
+Read
+[these guidelines](https://www.yegor256.com/2014/04/15/github-guidelines.html).
 Make sure you build is green before you contribute
-your pull request. You will need to have [Ruby](https://www.ruby-lang.org/en/) 2.3+ and
+your pull request. You will need to have
+[Ruby](https://www.ruby-lang.org/en/) 2.3+ and
 [Bundler](https://bundler.io/) installed. Then:
 
-```
-$ bundle update
-$ bundle exec rake
+```bash
+bundle update
+bundle exec rake
 ```
 
 If it's clean and you don't see any error messages, submit your pull request.
