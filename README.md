@@ -1,7 +1,5 @@
 # Command Line Mass-Email Sender
 
-<img src="/logo.svg" width="64px" height="64px"/>
-
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/rumble)](http://www.rultor.com/p/yegor256/rumble)
 [![We recommend RubyMine](https://www.elegantobjects.org/rubymine.svg)](https://www.jetbrains.com/ruby/)
@@ -29,7 +27,7 @@ rumble --help
 
 Simple liquid letter looks like this:
 
-```
+```liquid
 {{ first }},
 
 How are you?
