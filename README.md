@@ -39,7 +39,8 @@ Yegor
 The list of emails must contain three columns separated by a comma: first
 name, last name, and email.
 
-If you want to send via HTTP/SMTP proxy, use `--proxy=socks:<host>:<port>`.
+You can't send via HTTP/SMTP proxy, unfortunately (you are welcome
+to submit a pull request).
 
 ## How to contribute
 

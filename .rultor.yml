@@ -34,7 +34,7 @@ release:
     sed -i "s/0\.0\.0/${tag}/g" lib/rumble/version.rb
     git add lib/rumble/version.rb
     git commit -m "version set to ${tag}"
-    gem build decoor.gemspec
+    gem build rumble.gemspec
     chmod 0600 ../rubygems.yml
     gem push *.gem --config-file ../rubygems.yml
 merge:
