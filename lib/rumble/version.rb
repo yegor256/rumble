@@ -25,5 +25,5 @@
 # Copyright:: Copyright (c) 2018-2024 Yegor Bugayenko
 # License:: MIT
 module Rumble
-  VERSION = '0.0.0'
+  VERSION = '0.8.0'
 end
