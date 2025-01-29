@@ -262,6 +262,7 @@ PLATFORMS
   arm-linux-gnu
   arm-linux-musl
   arm64-darwin
+  arm64-darwin-23
   x64-mingw-ucrt
   x86-linux
   x86-linux-gnu
