@@ -86,7 +86,7 @@ class TestRumble < Minitest::Test
       host = 'localhost'
       certs = File.join(home, 'certs')
       FileUtils.mkdir_p(certs)
-      qbash("openssl genrsa -out #{Shellwords.escape(File.join(certs, 'key.pem'))} 2048")
+      qbash("openssl genrsa -out #{Shellwords.escape(File.join(certs, 'key.pem'))} 2048", log: $stdout)
       qbash(
         [
           'openssl req -x509 -new -nodes',
@@ -94,7 +94,8 @@ class TestRumble < Minitest::Test
           '-sha256 -days 1024',
           "-out #{Shellwords.escape(File.join(certs, 'cert.pem'))}",
           '-subj "/C=US/ST=State/L=City/O=Organization/CN=localhost"'
-        ]
+        ],
+        log: $stdout
       )
       RandomPort::Pool::SINGLETON.acquire(2) do |smtp, http|
         daemon(
