@@ -166,7 +166,7 @@ GEM
     psych (5.2.3)
       date
       stringio
-    qbash (0.3.0)
+    qbash (0.3.1)
       backtrace (> 0)
       elapsed (> 0)
       loog (> 0)
@@ -296,7 +296,7 @@ DEPENDENCIES
   cucumber (= 9.2.1)
   minitest (= 5.25.4)
   os (= 1.1.4)
-  qbash (~> 0)
+  qbash (>= 0.3.1)
   rake (= 13.2.1)
   random-port (>= 0.7.5)
   rspec-rails (= 7.1.0)
