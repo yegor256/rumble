@@ -21,11 +21,12 @@
 # SOFTWARE.
 
 require 'minitest/autorun'
-require 'tmpdir'
-require 'slop'
+require 'os'
+require 'qbash'
 require 'random-port'
 require 'shellwords'
-require 'qbash'
+require 'slop'
+require 'tmpdir'
 require_relative '../lib/rumble'
 require_relative '../lib/rumble/cli'
 
@@ -49,6 +50,7 @@ class TestRumble < Minitest::Test
   end
 
   def test_with_mailhog
+    skip('Works only on Ubuntu') if OS.mac? || OS.windows?
     Dir.mktmpdir do |home|
       flag = File.join(home, 'sent.txt')
       letter = File.join(home, 'letter.liquid')
@@ -77,6 +79,7 @@ class TestRumble < Minitest::Test
 
   def test_with_mailhog_with_tls
     skip('This baby does not work :(')
+    skip('Works only on Ubuntu') if OS.mac? || OS.windows?
     Dir.mktmpdir do |home|
       flag = File.join(home, 'sent.txt')
       letter = File.join(home, 'letter.liquid')
