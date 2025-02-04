@@ -33,12 +33,10 @@ begin
   config = File.expand_path('~/.rumble')
   if File.exist?(config)
     body = File.read(config)
-    extra = body.split(/[\r\n]+/).map(&:strip).map do |ln|
-      ln.gsub(/^(--(?:user|password)=).+$/, '\1***skipped***')
-    end
+    extra = body.split(/[\r\n]+/).map(&:strip)
     args += extra
-    puts "Found #{body.split(/\n/).length} lines in #{config}:
-  #{extra.join("\n  ")}"
+    puts "Found #{body.split(/\n/).length} lines in #{config}:"
+    puts extra.map { |ln| ln.gsub(/^(--(?:user|password)=).+$/, '\1***skipped***') }.join("\n  ")
   else
     puts "Default config file #{config} not found"
   end
@@ -105,7 +103,7 @@ begin
       raise '--password is required' unless opts[:password]
       from = Mail::Address.new(opts[:from])
       raise 'The --proxy option is not supported' if opts[:proxy]
-      puts "Sending to #{opts[:host]}:#{opts[:port]} from #{opts[:from]}"
+      puts "Sending to #{opts[:host]}:#{opts[:port]} (as #{opts[:user]}) from #{opts[:from]}"
       delivery_method :smtp, {
         domain: from.domain,
         address: opts[:host],

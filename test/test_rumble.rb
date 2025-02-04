@@ -49,6 +49,27 @@ class TestRumble < Minitest::Test
     end
   end
 
+  def test_with_live_gmail
+    skip('This is live test')
+    cfg = File.absolute_path(File.join(Dir.home, '.rumble'))
+    skip('No ~/.rumble file available') unless File.exist?(cfg)
+    Dir.mktmpdir do |home|
+      letter = File.join(home, 'letter.liquid')
+      File.write(letter, 'it is a test, please delete it')
+      qbash(
+        [
+          Shellwords.escape(File.join(__dir__, '../bin/rumble')),
+          '--method=smtp',
+          '--subject', 'rumble test email',
+          '--test', 'rumble+test@yegor256.com',
+          '--tls',
+          '--from', Shellwords.escape('Tester <yegor@zerocracy.com>'),
+          '--letter', Shellwords.escape(letter)
+        ]
+      )
+    end
+  end
+
   def test_with_mailhog
     skip('Works only on Ubuntu') if OS.mac? || OS.windows?
     Dir.mktmpdir do |home|
