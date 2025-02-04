@@ -134,12 +134,14 @@ class TestRumble < Minitest::Test
   private
 
   def wait_for(host, port)
+    start = Time.now
     loop do
       TCPSocket.new(host, port).close
       break
     rescue Errno::ECONNREFUSED => e
       sleep(1)
       puts "Waiting for mailhog at #{host}:#{port}: #{e.message}"
+      raise e if Time.now - start > 15
       retry
     end
   end
