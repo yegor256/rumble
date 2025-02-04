@@ -57,7 +57,7 @@ class TestRumble < Minitest::Test
       File.write(letter, 'Hi!')
       host = 'localhost'
       RandomPort::Pool::SINGLETON.acquire(2) do |smtp, http|
-        daemon("docker run --rm -p #{smtp}:1025 -p #{http}:8025 mailhog/mailhog", flag)
+        daemon("#{docker} run --rm -p #{smtp}:1025 -p #{http}:8025 mailhog/mailhog", flag)
         wait_for(host, http)
         qbash(
           [
@@ -99,7 +99,7 @@ class TestRumble < Minitest::Test
       RandomPort::Pool::SINGLETON.acquire(2) do |smtp, http|
         daemon(
           [
-            'docker run --rm',
+            "#{docker} run --rm",
             "-p #{smtp}:1025",
             "-p #{http}:8025",
             "-v #{Shellwords.escape(certs)}:/etc/certs",
@@ -133,6 +133,14 @@ class TestRumble < Minitest::Test
   end
 
   private
+
+  def docker
+    if ENV['DOCKER_SUDO'] == 'true'
+      'sudo docker'
+    else
+      'docker'
+    end
+  end
 
   def wait_for(host, port)
     start = Time.now
