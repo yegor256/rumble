@@ -151,7 +151,7 @@ class TestRumble < Minitest::Test
     rescue Errno::ECONNREFUSED => e
       sleep(1)
       puts "Waiting for mailhog at #{host}:#{port}: #{e.message}"
-      raise e if Time.now - start > 15
+      raise e if Time.now - start > 120
       retry
     end
   end
