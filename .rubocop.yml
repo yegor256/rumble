@@ -36,6 +36,8 @@ Layout/EndOfLine:
   EnforcedStyle: lf
 Metrics/CyclomaticComplexity:
   Max: 22
+Metrics/ClassLength:
+  Max: 200
 Metrics/MethodLength:
   Enabled: false
 Layout/MultilineMethodCallIndentation:

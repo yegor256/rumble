@@ -21,11 +21,12 @@
 
 STDOUT.sync = true
 
-require 'slop'
 require 'mail'
+require 'openssl'
+require 'slop'
 require_relative '../lib/rumble'
-require_relative '../lib/rumble/version'
 require_relative '../lib/rumble/cli'
+require_relative '../lib/rumble/version'
 
 begin
   args = []
@@ -103,7 +104,7 @@ begin
       raise '--user is required' unless opts[:user]
       raise '--password is required' unless opts[:password]
       from = Mail::Address.new(opts[:from])
-      raise 'The --proxy option is not supporte' if opts[:proxy]
+      raise 'The --proxy option is not supported' if opts[:proxy]
       puts "Sending to #{opts[:host]}:#{opts[:port]} from #{opts[:from]}"
       delivery_method :smtp, {
         domain: from.domain,
@@ -116,7 +117,12 @@ begin
         enable_starttls: opts[:tls],
         enable_starttls_auto: opts[:tls],
         open_timeout: 10,
-        read_timeout: 10
+        read_timeout: 10,
+        ssl_context: {
+          min_version: OpenSSL::SSL::TLS1_1_VERSION,
+          max_version: OpenSSL::SSL::TLS1_2_VERSION,
+          verify_mode: OpenSSL::SSL::VERIFY_NONE
+        }
       }
     else
       raise "Delivery method #{opts[:method]} is not supported"

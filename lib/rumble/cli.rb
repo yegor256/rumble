@@ -20,15 +20,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'English'
-require 'mail'
-require 'uuidtools'
-require 'liquid'
 require 'csv'
-require 'tmpdir'
+require 'English'
+require 'liquid'
+require 'mail'
+require 'rainbow'
 require 'redcarpet'
 require 'redcarpet/render_strip'
-require 'rainbow'
+require 'tmpdir'
+require 'uuidtools'
 require_relative 'version'
 
 # Rumble main script.
