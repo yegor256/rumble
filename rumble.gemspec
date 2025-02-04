@@ -44,6 +44,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'mail', '2.8.1'
   s.add_dependency 'net-smtp', '0.5.0'
   s.add_dependency 'net-smtp-proxy', '2.0.0'
+  s.add_dependency 'openssl', '~>3.0'
   s.add_dependency 'rainbow', '3.1.1'
   s.add_dependency 'redcarpet', '3.6.0'
   s.add_dependency 'slop', '4.10.1'

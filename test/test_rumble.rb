@@ -78,7 +78,6 @@ class TestRumble < Minitest::Test
   end
 
   def test_with_mailhog_with_tls
-    skip('This baby does not work :(')
     skip('Works only on Ubuntu') if OS.mac? || OS.windows?
     Dir.mktmpdir do |home|
       flag = File.join(home, 'sent.txt')

@@ -112,17 +112,8 @@ begin
         port: opts[:port],
         user_name: opts[:user],
         password: opts[:password],
-        tls: opts[:tls],
-        ssl: opts[:tls],
-        enable_starttls: opts[:tls],
-        enable_starttls_auto: opts[:tls],
-        open_timeout: 10,
-        read_timeout: 10,
-        ssl_context: {
-          min_version: OpenSSL::SSL::TLS1_1_VERSION,
-          max_version: OpenSSL::SSL::TLS1_2_VERSION,
-          verify_mode: OpenSSL::SSL::VERIFY_NONE
-        }
+        authentication: 'plain',
+        enable_starttls_auto: opts[:tls]
       }
     else
       raise "Delivery method #{opts[:method]} is not supported"
