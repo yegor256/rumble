@@ -60,6 +60,7 @@ class TestRumble < Minitest::Test
         qbash(
           [
             Shellwords.escape(File.join(__dir__, '../bin/rumble')),
+            '--method=smtp',
             '--port', smtp,
             '--host', host,
             '--subject', 'testing',
@@ -112,6 +113,7 @@ class TestRumble < Minitest::Test
         qbash(
           [
             Shellwords.escape(File.join(__dir__, '../bin/rumble')),
+            '--method=smtp',
             '--port', smtp,
             '--host', host,
             '--tls',
