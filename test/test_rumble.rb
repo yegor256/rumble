@@ -23,6 +23,9 @@
 require 'minitest/autorun'
 require 'tmpdir'
 require 'slop'
+require 'random-port'
+require 'shellwords'
+require 'qbash'
 require_relative '../lib/rumble'
 require_relative '../lib/rumble/cli'
 
@@ -32,7 +35,7 @@ require_relative '../lib/rumble/cli'
 # License:: MIT
 class TestRumble < Minitest::Test
   def test_basic
-    Dir.mktmpdir 'test' do |dir|
+    Dir.mktmpdir do |dir|
       letter = File.join(dir, 'letter.liquid')
       File.write(letter, 'Hi {{first}}, how are you?')
       Rumble::CLI.new(
@@ -42,6 +45,45 @@ class TestRumble < Minitest::Test
         host: 'localhost',
         from: 'Yegor Bugayenko <yegor256@gmail.com>'
       ).send
+    end
+  end
+
+  def test_with_mailhog
+    Dir.mktmpdir do |home|
+      flag = File.join(home, 'sent.txt')
+      letter = File.join(home, 'letter.liquid')
+      File.write(letter, 'Hi!')
+      host = 'localhost'
+      RandomPort::Pool::SINGLETON.acquire(2) do |smtp, http|
+        Thread.new do
+          qbash("docker run --rm -p #{smtp}:1025 -p #{http}:8025 mailhog/mailhog", log: $stdout) do |pid|
+            loop do
+              break if File.exist?(flag)
+            end
+            Process.kill('TERM', pid)
+          end
+        end
+        loop do
+          TCPSocket.new(host, http).close
+          break
+        rescue Errno::ECONNREFUSED => e
+          sleep(1)
+          puts "Waiting for mailhog at #{host}:#{http}: #{e.message}"
+          retry
+        end
+        qbash(
+          [
+            Shellwords.escape(File.join(__dir__, '../bin/rumble')),
+            '--port', smtp,
+            '--host', host,
+            '--subject', 'testing',
+            '--test', 'to@example.com',
+            '--from', Shellwords.escape('tester <from@example.com>'),
+            '--letter', Shellwords.escape(letter)
+          ]
+        )
+        FileUtils.touch(flag)
+      end
     end
   end
 end

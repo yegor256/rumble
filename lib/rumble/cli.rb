@@ -66,8 +66,9 @@ class Rumble::CLI
     emails.each do |array|
       email = array[@opts['col-email'].to_i]
       unless email
-        puts "Email is #{Rainbow('absent').red} \
-at the column ##{@opts['col-email'].to_i}: #{array}"
+        puts \
+          "Email is #{Rainbow('absent').red} " \
+          "at the column ##{@opts['col-email'].to_i}: #{array}"
         next
       end
       email = email.strip.downcase

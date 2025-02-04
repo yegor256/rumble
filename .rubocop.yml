@@ -24,7 +24,7 @@ AllCops:
     - 'assets/**/*'
     - 'vendor/**/**'
   DisplayCopNames: true
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 3.0
   NewCops: enable
   SuggestExtensions: false
 require:

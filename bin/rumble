@@ -63,7 +63,7 @@ begin
         default: 'sendmail'
       o.bool '--tls',
         'Whether TLS must be used or not (default: true)',
-        default: true
+        default: false
       o.string '--host', 'SMTP host name'
       o.integer '--port', 'SMTP port number (default: 25)', default: 25
       o.string '--user', 'SMTP user name'
@@ -104,14 +104,19 @@ begin
       raise '--password is required' unless opts[:password]
       from = Mail::Address.new(opts[:from])
       raise 'The --proxy option is not supporte' if opts[:proxy]
+      puts "Sending to #{opts[:host]}:#{opts[:port]} from #{opts[:from]}"
       delivery_method :smtp, {
         domain: from.domain,
         address: opts[:host],
         port: opts[:port],
         user_name: opts[:user],
         password: opts[:password],
+        tls: opts[:tls],
+        ssl: opts[:tls],
         enable_starttls: opts[:tls],
-        enable_starttls_auto: opts[:tls]
+        enable_starttls_auto: opts[:tls],
+        open_timeout: 10,
+        read_timeout: 10
       }
     else
       raise "Delivery method #{opts[:method]} is not supported"
