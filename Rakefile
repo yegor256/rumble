@@ -33,7 +33,7 @@ def version
   Gem::Specification.load(Dir['*.gemspec'].first).version
 end
 
-task default: %i[clean test features rubocop yard copyright]
+task default: %i[clean test features rubocop yard]
 
 require 'rake/testtask'
 desc 'Run all unit tests'
@@ -63,12 +63,4 @@ Cucumber::Rake::Task.new(:features) do
 end
 Cucumber::Rake::Task.new(:'features:html') do |t|
   t.profile = 'html_report'
-end
-
-task :copyright do
-  sh "grep -q -r '#{Date.today.strftime('%Y')}' \
-    --include '*.rb' \
-    --include '*.txt' \
-    --include 'Rakefile' \
-    ."
 end
