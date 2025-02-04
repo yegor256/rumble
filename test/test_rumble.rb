@@ -63,6 +63,7 @@ class TestRumble < Minitest::Test
             '--method=smtp',
             '--port', smtp,
             '--host', host,
+            '--user=foo', '--password=foo',
             '--subject', 'testing',
             '--test', 'to@example.com',
             '--from', Shellwords.escape('tester <from@example.com>'),
