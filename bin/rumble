@@ -32,7 +32,9 @@ begin
   config = File.expand_path('~/.rumble')
   if File.exist?(config)
     body = File.read(config)
-    extra = body.split(/[\r\n]+/).map(&:strip)
+    extra = body.split(/[\r\n]+/).map(&:strip).map do |ln|
+      ln.gsub(/^(--(?:user|password)=).+$/, '\1***skipped***')
+    end
     args += extra
     puts "Found #{body.split(/\n/).length} lines in #{config}:
   #{extra.join("\n  ")}"
@@ -63,7 +65,7 @@ begin
         'Whether TLS must be used or not (default: true)',
         default: true
       o.string '--host', 'SMTP host name'
-      o.integer '--port', 'SMTP port number (25 by default)', default: 25
+      o.integer '--port', 'SMTP port number (default: 25)', default: 25
       o.string '--user', 'SMTP user name'
       o.string '--password', 'SMTP password'
       o.string '--proxy', 'HTTP/SOCKS proxy, e.g. "socks:192.168.0.1:8080"'
@@ -73,9 +75,9 @@ begin
       o.string '--resume', 'Email address from which we should resume'
       o.string '--skip', 'File name with emails that opted-out (black list)'
       o.string '--test', 'Email address to use instead of the real user list'
-      o.string '--col-first', 'First name columm (0 by default)', default: 0
-      o.string '--col-last', 'Last name columm (1 by default)', default: 1
-      o.string '--col-email', 'Email columm (2 by default)', default: 2
+      o.string '--col-first', 'First name columm (default: 0)', default: 0
+      o.string '--col-last', 'Last name columm (default: 1)', default: 1
+      o.string '--col-email', 'Email columm (default: 2)', default: 2
       o.string '--attach', 'The script to run on each email'
     end
   rescue Slop::Error => ex
