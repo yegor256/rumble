@@ -31,7 +31,6 @@ require:
   - rubocop-minitest
   - rubocop-performance
   - rubocop-rake
-
 Layout/EndOfLine:
   EnforcedStyle: lf
 Metrics/CyclomaticComplexity:
