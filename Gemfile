@@ -7,7 +7,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'cucumber', '9.2.1', require: false
-gem 'minitest', '5.25.4', require: false
+gem 'minitest', '5.25.5', require: false
 gem 'os', '1.1.4', require: false
 gem 'qbash', '>=0.3.1', require: false
 gem 'rake', '13.2.1', require: false
