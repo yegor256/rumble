@@ -72,7 +72,7 @@ GEM
       net-pop
       net-smtp
     mini_mime (1.1.5)
-    minitest (5.25.4)
+    minitest (5.25.5)
     multi_test (1.1.0)
     net-imap (0.5.6)
       date
@@ -169,7 +169,7 @@ PLATFORMS
 
 DEPENDENCIES
   cucumber (= 9.2.1)
-  minitest (= 5.25.4)
+  minitest (= 5.25.5)
   os (= 1.1.4)
   qbash (>= 0.3.1)
   rake (= 13.2.1)
