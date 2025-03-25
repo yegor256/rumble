@@ -12,7 +12,6 @@ gem 'os', '1.1.4', require: false
 gem 'qbash', '>=0.3.1', require: false
 gem 'rake', '13.2.1', require: false
 gem 'random-port', '>=0.7.5', require: false
-gem 'rspec-rails', '7.1.0', require: false
 gem 'rubocop', '1.71.2', require: false
 gem 'rubocop-minitest', '>0', require: false
 gem 'rubocop-performance', '>0', require: false
