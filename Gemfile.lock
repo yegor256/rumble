@@ -65,7 +65,9 @@ GEM
     language_server-protocol (3.17.0.4)
     lint_roller (1.1.0)
     liquid (5.5.0)
-    loog (0.6.0)
+    logger (1.7.0)
+    loog (0.6.1)
+      logger (~> 1.0)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
