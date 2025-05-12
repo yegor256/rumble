@@ -95,7 +95,7 @@ GEM
       racc
     prism (1.4.0)
     proxifier (1.0.3)
-    qbash (0.4.0)
+    qbash (0.4.5)
       backtrace (> 0)
       elapsed (> 0)
       loog (> 0)
