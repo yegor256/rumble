@@ -102,7 +102,7 @@ GEM
       tago (> 0)
     racc (1.8.1)
     rainbow (3.1.1)
-    rake (13.2.1)
+    rake (13.3.0)
     random-port (0.7.5)
       tago (> 0)
     redcarpet (3.6.0)
