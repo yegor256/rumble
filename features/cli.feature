@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2018-2025 Yegor Bugayenko
+# SPDX-FileCopyrightText: Copyright (c) 2018-2026 Yegor Bugayenko
 # SPDX-License-Identifier: MIT
 Feature: Command Line Processing
   As a newsletter author I want to be able to send a newsletter
