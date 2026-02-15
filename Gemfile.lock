@@ -48,6 +48,10 @@ GEM
     date (3.5.1)
     diff-lcs (1.6.2)
     docile (1.4.1)
+    donce (0.7.0)
+      backtrace (~> 0.3)
+      os (~> 1.1)
+      qbash (~> 0.3)
     elapsed (0.3.1)
       loog (~> 0.6)
       tago (~> 0.1)
@@ -207,6 +211,7 @@ PLATFORMS
 
 DEPENDENCIES
   cucumber (~> 9.2)
+  donce (~> 0.7)
   minitest (~> 6.0)
   minitest-reporters (~> 1.7)
   nokogiri (~> 1.19)

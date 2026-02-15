@@ -36,3 +36,5 @@ Layout/EmptyLineAfterGuardClause:
   Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
+Minitest/EmptyLineBeforeAssertionMethods:
+  Enabled: false
