@@ -40,22 +40,23 @@ class TestHermetic < Minitest::Test
       )
       stdout = donce(
         home: home,
+        args: '--network none',
         command: [
           'bin/rumble',
+          '--dry',
           '--method=smtp',
-          '--host=127.0.0.1',
+          '--host=smpt.gmail.com',
           '--port=25',
           '--user=test',
           '--password=test',
-          "--subject=test-#{SecureRandom.hex(4)}",
+          '--subject=test',
           '--test=test@example.com',
-          '--dry',
-          '"--from=Tester <test@example.com>"',
+          '--from=test@example.com',
           '--letter=/app/letter.liquid'
         ],
         timeout: 300
       )
-      assert_includes(stdout, 'dry', "Output lacks dry mode confirmation: #{stdout}")
+      assert_includes(stdout, 'done #1')
     end
   end
 
