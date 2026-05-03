@@ -57,9 +57,9 @@ begin
       o.string '--resume', 'Email address from which we should resume'
       o.string '--skip', 'File name with emails that opted-out (black list)'
       o.string '--test', 'Email address to use instead of the real user list'
-      o.string '--col-first', 'First name columm (default: 0)', default: 0
-      o.string '--col-last', 'Last name columm (default: 1)', default: 1
-      o.string '--col-email', 'Email columm (default: 2)', default: 2
+      o.string '--col-first', 'First name column (default: 0)', default: 0
+      o.string '--col-last', 'Last name column (default: 1)', default: 1
+      o.string '--col-email', 'Email column (default: 2)', default: 2
       o.string '--attach', 'The script to run on each email'
     end
   rescue Slop::Error => ex
@@ -69,7 +69,7 @@ begin
   Encoding.default_external = Encoding::UTF_8
   Encoding.default_internal = Encoding::UTF_8
 
-  puts 'It is "dry" run, no emails will be actually sent!' if opts[:dry]
+  puts 'It is a "dry" run, no emails will actually be sent!' if opts[:dry]
 
   Mail.defaults do
     case opts[:method].downcase.strip

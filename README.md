@@ -9,7 +9,7 @@
 [![Gem Version](https://badge.fury.io/rb/rumble.svg)](https://badge.fury.io/rb/rumble)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a3fee65d42a9cf6397ea/maintainability)](https://codeclimate.com/github/yegor256/rumble/maintainability)
 [![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/rumble.svg)](https://codecov.io/github/yegor256/rumble?branch=master)
-[![Hits-of-Code](https://hitsofcode.com/github/yegor256/0rsk)](https://hitsofcode.com/view/github/yegor256/0rsk)
+[![Hits-of-Code](https://hitsofcode.com/github/yegor256/rumble)](https://hitsofcode.com/view/github/yegor256/rumble)
 
 This command line tool helps you send newsletters.
 
@@ -25,7 +25,7 @@ Run it locally and read its output:
 rumble --help
 ```
 
-Simple liquid letter looks like this:
+A simple Liquid letter looks like this:
 
 ```liquid
 {{ first }},
