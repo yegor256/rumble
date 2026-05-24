@@ -189,7 +189,7 @@ GEM
       unicode-emoji (~> 4.1)
     unicode-emoji (4.2.0)
     uuidtools (2.2.0)
-    yard (0.9.38)
+    yard (0.9.43)
 
 PLATFORMS
   aarch64-linux
