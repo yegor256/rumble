@@ -33,8 +33,7 @@ class TestRumble < Minitest::Test
 
   def test_with_live_gmail
     skip('This is live test')
-    cfg = File.absolute_path(File.join(Dir.home, '.rumble'))
-    skip('No ~/.rumble file available') unless File.exist?(cfg)
+    skip('No ~/.rumble file available') unless File.exist?(File.absolute_path(File.join(Dir.home, '.rumble')))
     Dir.mktmpdir do |home|
       letter = File.join(home, 'letter.liquid')
       File.write(letter, 'it is a test, please delete it')
@@ -153,8 +152,8 @@ class TestRumble < Minitest::Test
       break
     rescue Errno::ECONNREFUSED => e
       sleep(1)
-      puts "Waiting for mailhog at #{host}:#{port}: #{e.message}"
-      raise e if Time.now - start > 120
+      puts("Waiting for mailhog at #{host}:#{port}: #{e.message}")
+      raise(e) if Time.now - start > 120
       retry
     end
   end

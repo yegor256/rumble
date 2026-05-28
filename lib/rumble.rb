@@ -8,5 +8,4 @@
 # Copyright:: Copyright (c) 2018-2026 Yegor Bugayenko
 # License:: MIT
 module Rumble
-  # Nothing
 end

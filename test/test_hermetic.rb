@@ -24,8 +24,7 @@ class TestHermetic < Minitest::Test
       FileUtils.cp(File.join(root, 'rumble.gemspec'), home)
       FileUtils.cp_r(File.join(root, 'lib'), home)
       FileUtils.cp_r(File.join(root, 'bin'), home)
-      letter = File.join(home, 'letter.liquid')
-      File.write(letter, "Test äöü #{SecureRandom.hex(8)}")
+      File.write(File.join(home, 'letter.liquid'), "Test äöü #{SecureRandom.hex(8)}")
       File.write(
         File.join(home, 'Dockerfile'),
         [
@@ -38,25 +37,27 @@ class TestHermetic < Minitest::Test
           'RUN bundle install --quiet'
         ].join("\n")
       )
-      stdout = donce(
-        home: home,
-        args: '--network none',
-        command: [
-          'bin/rumble',
-          '--dry',
-          '--method=smtp',
-          '--host=smpt.gmail.com',
-          '--port=25',
-          '--user=test',
-          '--password=test',
-          '--subject=test',
-          '--test=test@example.com',
-          '--from=test@example.com',
-          '--letter=/app/letter.liquid'
-        ],
-        timeout: 300
+      assert_includes(
+        donce(
+          home: home,
+          args: '--network none',
+          command: [
+            'bin/rumble',
+            '--dry',
+            '--method=smtp',
+            '--host=smpt.gmail.com',
+            '--port=25',
+            '--user=test',
+            '--password=test',
+            '--subject=test',
+            '--test=test@example.com',
+            '--from=test@example.com',
+            '--letter=/app/letter.liquid'
+          ],
+          timeout: 300
+        ),
+        'done #1'
       )
-      assert_includes(stdout, 'done #1')
     end
   end
 

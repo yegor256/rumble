@@ -14,6 +14,7 @@ plugins:
   - rubocop-minitest
   - rubocop-performance
   - rubocop-rake
+  - rubocop-elegant
 Layout/EndOfLine:
   EnforcedStyle: lf
 Metrics/CyclomaticComplexity:
@@ -38,3 +39,9 @@ Style/ClassAndModuleChildren:
   Enabled: false
 Minitest/EmptyLineBeforeAssertionMethods:
   Enabled: false
+Lint/NumberConversion:
+  Exclude:
+    - 'lib/rumble/cli.rb'
+Elegant/GoodMethodName:
+  AllowedNames:
+    - wait_for
