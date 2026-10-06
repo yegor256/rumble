@@ -45,7 +45,7 @@ class TestHermetic < Minitest::Test
             'bin/rumble',
             '--dry',
             '--method=smtp',
-            '--host=smpt.gmail.com',
+            '--host=smtp.gmail.com',
             '--port=25',
             '--user=test',
             '--password=test',
