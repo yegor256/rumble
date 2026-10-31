@@ -23,6 +23,8 @@ Gem::Specification.new do |s|
   s.executables = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
   s.rdoc_options = ['--charset=UTF-8']
   s.extra_rdoc_files = ['README.md', 'LICENSE.txt']
+  s.add_dependency('base64', '~>0.3')
+  s.add_dependency('csv', '~>3.3')
   s.add_dependency('liquid', '5.5.0')
   s.add_dependency('mail', '2.8.1')
   s.add_dependency('net-smtp', '0.5.0')
