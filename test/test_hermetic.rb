@@ -28,7 +28,7 @@ class TestHermetic < Minitest::Test
       File.write(
         File.join(home, 'Dockerfile'),
         [
-          'FROM ruby:3.2',
+          'FROM ruby:3.3',
           'WORKDIR /app',
           'COPY Gemfile Gemfile.lock rumble.gemspec /app/',
           'COPY lib /app/lib/',
