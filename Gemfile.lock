@@ -4,15 +4,15 @@ PATH
     rumble (0.0.0)
       base64 (~> 0.3)
       csv (~> 3.3)
-      liquid (= 5.5.0)
-      mail (= 2.8.1)
-      net-smtp (= 0.5.0)
+      liquid (= 5.14.0)
+      mail (= 2.9.1)
+      net-smtp (= 0.5.2)
       net-smtp-proxy (= 2.0.0)
-      openssl (~> 3.0)
+      openssl (~> 4.0)
       rainbow (= 3.1.1)
-      redcarpet (= 3.6.0)
+      redcarpet (= 3.6.1)
       slop (= 4.10.1)
-      uuidtools (= 2.2.0)
+      uuidtools (= 3.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -52,7 +52,7 @@ GEM
     cucumber-query (16.2.0)
       cucumber-messages (>= 34.1, < 36)
     cucumber-tag-expressions (11.0.1)
-    date (3.5.1)
+    date (3.6.0)
     diff-lcs (2.0.0)
     donce (0.7.0)
       backtrace (~> 0.3)
@@ -74,15 +74,18 @@ GEM
     ffi (1.17.4-x86_64-darwin)
     ffi (1.17.4-x86_64-linux-gnu)
     ffi (1.17.4-x86_64-linux-musl)
-    json (2.21.2)
+    json (3.1.0)
     language_server-protocol (3.17.0.6)
     lint_roller (1.1.0)
-    liquid (5.5.0)
+    liquid (5.14.0)
+      bigdecimal
+      strscan (>= 3.1.1)
     logger (1.7.0)
     loog (0.8.0)
       ellipsized
       logger (~> 1.0)
-    mail (2.8.1)
+    mail (2.9.1)
+      logger
       mini_mime (>= 0.1.1)
       net-imap
       net-pop
@@ -99,14 +102,14 @@ GEM
       minitest (>= 5.0, < 7)
       ruby-progressbar
     multi_test (2.0.0)
-    net-imap (0.6.4)
+    net-imap (0.6.8)
       date
       net-protocol
     net-pop (0.1.2)
       net-protocol
-    net-protocol (0.2.2)
+    net-protocol (0.4.0)
       timeout
-    net-smtp (0.5.0)
+    net-smtp (0.5.2)
       net-protocol
     net-smtp-proxy (2.0.0)
       proxifier (~> 1.0)
@@ -131,7 +134,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.19.7-x86_64-linux-musl)
       racc (~> 1.4)
-    openssl (3.3.3)
+    openssl (4.0.2)
     os (1.1.4)
     parallel (2.3.0)
     parser (3.3.13.0)
@@ -149,7 +152,7 @@ GEM
     rake (13.4.2)
     random-port (0.8.2)
       tago (~> 0.0)
-    redcarpet (3.6.0)
+    redcarpet (3.6.1)
     regexp_parser (2.13.1)
     rexml (3.4.4)
     rubocop (1.92.2)
@@ -186,6 +189,7 @@ GEM
       rexml
       simplecov (~> 1.0)
     slop (4.10.1)
+    strscan (3.1.8)
     sys-uname (1.5.1)
       ffi (~> 1.1)
       memoist3 (~> 1.0.0)
@@ -198,7 +202,7 @@ GEM
     unicode-display_width (3.3.0)
       unicode-emoji (~> 4.3)
     unicode-emoji (4.3.0)
-    uuidtools (2.2.0)
+    uuidtools (3.0.0)
     win32ole (1.9.3)
     yard (0.9.45)
 
