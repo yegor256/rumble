@@ -25,14 +25,14 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ['README.md', 'LICENSE.txt']
   s.add_dependency('base64', '~>0.3')
   s.add_dependency('csv', '~>3.3')
-  s.add_dependency('liquid', '5.5.0')
-  s.add_dependency('mail', '2.8.1')
-  s.add_dependency('net-smtp', '0.5.0')
+  s.add_dependency('liquid', '5.14.0')
+  s.add_dependency('mail', '2.9.1')
+  s.add_dependency('net-smtp', '0.5.2')
   s.add_dependency('net-smtp-proxy', '2.0.0')
-  s.add_dependency('openssl', '~>3.0')
+  s.add_dependency('openssl', '~>4.0')
   s.add_dependency('rainbow', '3.1.1')
-  s.add_dependency('redcarpet', '3.6.0')
+  s.add_dependency('redcarpet', '3.6.1')
   s.add_dependency('slop', '4.10.1')
-  s.add_dependency('uuidtools', '2.2.0')
+  s.add_dependency('uuidtools', '3.0.0')
   s.metadata['rubygems_mfa_required'] = 'true'
 end
